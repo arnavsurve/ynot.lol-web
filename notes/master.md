@@ -74,7 +74,7 @@
 
 ## New Ideas
 
-- explore mode/shuffle button
+- explore/shuffle button
 - display tags in a dynamic cloud format (pinterest?); clicking on a tag reveals related sites instantly
 
 - user profiles
