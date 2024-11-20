@@ -25,74 +25,7 @@
         </div>
       </nav>
 
-      <div class="showcase-grid">
-        <div class="showcase-row">
-          <div class="showcase">
-            <iframe
-              src="https://yev.bar"
-              title="Yev's website"
-              loading="lazy"
-            ></iframe>
-          </div>
-          <div class="showcase">
-            <iframe
-              src="https://v2-embednotion.com/13c7550ba3aa8009b2d3d2ed16633852"
-              style="
-                width: 100%;
-                height: 300px;
-                border: 2px solid #ccc;
-                border-radius: 10px;
-                padding: none;
-              "
-            ></iframe>
-          </div>
-          <div class="showcase">
-            <iframe
-              src="https://repete.art/"
-              title="Example site 3"
-              loading="lazy"
-            ></iframe>
-          </div>
-          <div class="showcase">
-            <iframe
-              src="http://ibiyemiabiodun.com"
-              title="Example site 4"
-              loading="lazy"
-            ></iframe>
-          </div>
-        </div>
-
-        <div class="showcase-row">
-          <div class="showcase">
-            <iframe
-              src="https://example.com"
-              title="Example site 5"
-              loading="lazy"
-            ></iframe>
-          </div>
-          <div class="showcase">
-            <iframe
-              src="https://example.com"
-              title="Example site 6"
-              loading="lazy"
-            ></iframe>
-          </div>
-          <div class="showcase">
-            <iframe
-              src="https://example.com"
-              title="Example site 7"
-              loading="lazy"
-            ></iframe>
-          </div>
-          <div class="showcase">
-            <iframe
-              src="https://example.com"
-              title="Example site 8"
-              loading="lazy"
-            ></iframe>
-          </div>
-        </div>
-      </div>
+      <div class="showcase-grid" id="showcase-grid"></div>
     </main>
 
     <!-- Modal -->
@@ -140,6 +73,35 @@
         document.getElementById("submitModal").style.display = "none";
       }
 
+      async function fetchSites() {
+        try {
+          const response = await fetch("http://127.0.0.1:5000/api/sites");
+          const data = await response.json();
+          const showcaseGrid = document.getElementById("showcase-grid");
+
+          for (const key in data) {
+            if (data.hasOwnProperty(key)) {
+              const site = data[key];
+              const iframe = document.createElement("iframe");
+              iframe.src = site.url;
+              iframe.title = site.name;
+              iframe.loading = "lazy";
+              iframe.className = "showcase-item";
+
+              const showcaseRow = document.createElement("div");
+              showcaseRow.className = "showcase-row";
+              showcaseRow.appendChild(iframe);
+
+              showcaseGrid.appendChild(showcaseRow);
+            }
+          }
+        } catch (error) {
+          console.error("Error fetching sites:", error);
+        }
+      }
+
+      window.onload = fetchSites;
+
       async function handleSubmit(event) {
         event.preventDefault();
         const form = event.target;
@@ -173,4 +135,3 @@
     </script>
   </body>
 </html>
-
