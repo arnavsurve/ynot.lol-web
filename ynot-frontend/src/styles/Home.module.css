@@ -23,11 +23,13 @@
   border-radius: 15px;
   border: 1px solid #eaeaea;
 }
+
 /* Hide scrollbar for IE, Edge and Firefox */
 .showcase-item {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
 /* Hide scrollbar for webkit browsers */
 .showcase-item::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera*/
